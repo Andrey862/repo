@@ -26,7 +26,7 @@ class ClientListener(Thread):
         name = None
         l = -1
         time_ = time.time()
-        val = 0.0
+        value = 0.0
         while True:
             rcv = self.sock.recv(4096)
             count += rcv.count(b'\n')
