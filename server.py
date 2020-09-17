@@ -45,7 +45,7 @@ class ClientListener(Thread):
             if (read_meta and time.time() - time_ > 0.2):
                 res = len(data) * 1.0 / l
                 if (res-value > 0.05):
-                    self.sock.send(str().encode('UTF-8'))
+                    self.sock.send(str(res).encode('UTF-8'))
                     time_ = time.time()
                     value = res
 
