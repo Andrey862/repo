@@ -26,6 +26,7 @@ class ClientListener(Thread):
         name = None
         l = -1
         time_ = time.time()
+        val = 0.0
         while True:
             rcv = self.sock.recv(4096)
             count += rcv.count(b'\n')
@@ -41,9 +42,12 @@ class ClientListener(Thread):
                 else:
                     data = b''
 
-            if (read_meta and time.time()-time_ > 0.2):
-                self.sock.send(str(len(data) / l).encode('UTF-8'))
-                time_ = time.time()
+            if (read_meta and time.time() - time_ > 0.2):
+                res = len(data) * 1.0 / l
+                if (res-value > 0.05):
+                    self.sock.send(str().encode('UTF-8'))
+                    time_ = time.time()
+                    value = res
 
             if (not rcv or count >= 3):
                 break
